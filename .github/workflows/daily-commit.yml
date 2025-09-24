@@ -20,16 +20,17 @@ jobs:
         git config --global user.name "lehonganh0201"
         git config --global user.email "le2960620@gmail.com"
 
-    - name: Random số lần commit (1–5) và commit
+    - name: Random số lần commit và commit
       run: |
         NUM_COMMITS=$((RANDOM % 6 + 5))
         echo "Hôm nay sẽ commit $NUM_COMMITS lần!"
         
-        # Loop để tạo số commit ngẫu nhiên
         for ((i=1; i<=NUM_COMMITS; i++)); do
-          echo "$(date '+%Y-%m-%d %H:%M:%S') - Commit thứ $i: Chăm chỉ code đây! 😎" >> activity.log
+          CURRENT_TIME=$(date '+%Y-%m-%d %H:%M:%S')
+          CONTENT="$CURRENT_TIME và $NUM_COMMITS lần commit, lần commit thứ $i"
+          echo "$CONTENT" >> activity.log
           git add activity.log
-          git commit -m "Daily auto commit $i/$NUM_COMMITS: $(date '+%Y-%m-%d %H:%M:%S')"
+          git commit -m "$CONTENT"
         done
 
     - name: Push changes
