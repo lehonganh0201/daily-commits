@@ -28,11 +28,8 @@ jobs:
         for ((i=1; i<=NUM_COMMITS; i++)); do
           CURRENT_TIME=$(date '+%Y-%m-%d %H:%M:%S')
           CONTENT="$CURRENT_TIME và $NUM_COMMITS lần commit, lần commit thứ $i"
-          echo "$CONTENT" >> activity.log
+          echo "$CONTENT - Random ID: $RANDOM" >> activity.log  # Thêm ID ngẫu nhiên để tạo thay đổi
           git add activity.log
           git commit -m "$CONTENT"
+          git push https://${{ secrets.MY_PAT }}@github.com/lehonganh0201/daily-commits.git HEAD:main
         done
-
-    - name: Push changes
-      run: |
-        git push https://${{ secrets.MY_PAT }}@github.com/lehonganh0201/daily-commits.git HEAD:main
