@@ -2,7 +2,7 @@ name: Daily Random Commits
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # Chạy lúc 12h trưa UTC (5PM VN, +7). Chỉnh giờ nếu muốn.
+    - cron: '0 12 * * *'  # Chạy lúc 12h trưa UTC (7PM VN). Chỉnh giờ nếu muốn.
   workflow_dispatch:  # Cho phép chạy thủ công để test
 
 jobs:
@@ -15,6 +15,11 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Cấu hình Git identity
+      run: |
+        git config --global user.name "lehonganh0201"
+        git config --global user.email "le2960620@gmail.com"
+
     - name: Random số lần commit (1–5) và commit
       run: |
         # Random số commit từ 1 đến 5
@@ -23,8 +28,8 @@ jobs:
         
         # Loop để tạo số commit ngẫu nhiên
         for ((i=1; i<=NUM_COMMITS; i++)); do
-          echo "$(date '+%Y-%m-%d %H:%M:%S') - Commit thứ $i: Chăm chỉ code đây! 😎" >> README.md
-          git add README.md
+          echo "$(date '+%Y-%m-%d %H:%M:%S') - Commit thứ $i: Chăm chỉ code đây! 😎" >> activity.log
+          git add activity.log
           git commit -m "Daily auto commit $i/$NUM_COMMITS: $(date '+%Y-%m-%d %H:%M:%S')"
         done
 
