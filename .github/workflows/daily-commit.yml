@@ -22,8 +22,7 @@ jobs:
 
     - name: Random số lần commit (1–5) và commit
       run: |
-        # Random số commit từ 1 đến 5
-        NUM_COMMITS=$((RANDOM % 5 + 1))
+        NUM_COMMITS=$((RANDOM % 6 + 5))
         echo "Hôm nay sẽ commit $NUM_COMMITS lần!"
         
         # Loop để tạo số commit ngẫu nhiên
